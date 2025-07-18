@@ -1,15 +1,16 @@
+// src/app.module.ts
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
-    // Load .env into process.env globally
     ConfigModule.forRoot({ isGlobal: true }),
-    // Connect to MongoDB using the URI from .env
-    MongooseModule.forRoot(process.env.MONGODB_URI),
+    MongooseModule.forRoot(process.env.MONGODB_URI!),
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
